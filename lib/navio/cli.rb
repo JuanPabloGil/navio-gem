@@ -3,6 +3,7 @@
 require_relative "config"
 require_relative "launcher"
 
+require "byebug"
 module Navio
   # CLI class provides command-line interface for managing project URL shortcuts.
   class CLI
@@ -24,7 +25,7 @@ module Navio
     end
 
     def run(args)
-      return how_help if args.empty?
+      return show_help if args.empty?
 
       command = args.shift
 
@@ -39,9 +40,7 @@ module Navio
 
     def open_url(shortcut)
       url = @config.get_url(shortcut)
-
       if url
-        puts "Opening #{url}..."
         @launcher.open_url(url)
         true
       else

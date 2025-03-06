@@ -11,15 +11,15 @@ Gem::Specification.new do |spec|
   spec.summary = "A simple CLI tool to quickly navigate to important project URLs"
   spec.description = "Project Navigator provides a convenient way to define and access important project-related " \
                      "URLs like design files, repositories, documentation, and more from your terminal."
-  spec.homepage = "https://github.com/juanpablogil/project_navigator"
+  spec.homepage = "https://github.com/JuanPabloGil/navio-gem/"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
 
   spec.metadata["allowed_push_host"] = "https://rubygems.org"
 
   spec.metadata["homepage_uri"] = spec.homepage
-  spec.metadata["source_code_uri"] = "https://github.com/juanpablogil/project_navigator"
-  spec.metadata["changelog_uri"] = "https://github.com/juanpablogil/project_navigator/blob/main/CHANGELOG.md"
+  spec.metadata["source_code_uri"] = "https://github.com/JuanPabloGil/navio-gem/"
+  spec.metadata["changelog_uri"] = "https://github.com/juanpablogil/navio-gem/blob/main/CHANGELOG.md"
 
   # Specify which files should be added to the gem when it is released.
   # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
