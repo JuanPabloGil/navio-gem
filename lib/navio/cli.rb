@@ -93,7 +93,11 @@ module Navio
     end
 
     def show_help(_args = [])
-      puts <<~HELP
+      puts help_message
+    end
+
+    def help_message
+      <<~HELP
         Navio - Quick access to project URLs
 
         Usage:
