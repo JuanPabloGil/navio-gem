@@ -34,13 +34,19 @@ module Navio
       true
     end
 
-    private
-
     def config_path
       path = find_config_in_path(Dir.pwd)
       path ||= File.join(Dir.home, CONFIG_FILE)
       path
     end
+
+    def save_config
+      File.open(config_path, "w") do |file|
+        file.write(YAML.dump(@config))
+      end
+    end
+
+    private
 
     def find_config_in_path(start_path)
       path = start_path
@@ -58,12 +64,6 @@ module Navio
         YAML.load_file(config_path) || {}
       else
         { "shortcuts" => {} }
-      end
-    end
-
-    def save_config
-      File.open(config_path, "w") do |file|
-        file.write(YAML.dump(@config))
       end
     end
   end

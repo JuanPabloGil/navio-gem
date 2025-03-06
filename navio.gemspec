@@ -30,6 +30,10 @@ Gem::Specification.new do |spec|
         f.start_with?(*%w[bin/ test/ spec/ features/ .git .github appveyor Gemfile])
     end
   end
+  
+  # Manually add Railtie file
+  spec.files += Dir.glob("lib/navio/railtie.rb")
+  
   spec.bindir = "exe"
   # spec.executables = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
   spec.executables = ["navio"]
