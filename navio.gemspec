@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.email = ["juanpablo.gil@icloud.com"]
 
   spec.summary = "A simple CLI tool to quickly navigate to important project URLs"
-  spec.description = "Project Navigator provides a convenient way to define and access important project-related URLs " \
-                     "like design files, repositories, documentation, and more from your terminal."
+  spec.description = "Project Navigator provides a convenient way to define and access important project-related " \
+                     "URLs like design files, repositories, documentation, and more from your terminal."
   spec.homepage = "https://github.com/juanpablogil/project_navigator"
   spec.license = "MIT"
   spec.required_ruby_version = ">= 3.1.0"
@@ -36,7 +36,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   # Uncomment to register a new dependency of your gem
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_dependency "launchy", "~> 3.1.1"
 
   # For more information and examples about making a new gem, check out our
   # guide at: https://bundler.io/guides/creating_gem.html

@@ -5,30 +5,8 @@ require "yaml"
 module Navio
   # This class handles the configuration for the Navio project navigator.
   # It allows for loading, saving, and managing URL shortcuts stored in a YAML configuration file.
-  #
-  # The configuration file is named `.project_navigator.yml` and is searched for in the current directory,
-  # its parent directories, and the user's home directory.
-  #
-  # Example usage:
-  #   config = Navio::Config.new
-  #   config.add_shortcut("github", "https://github.com")
-  #   url = config.get_url("github")
-  #   config.remove_shortcut("github")
-  #
-  # Methods:
-  # - initialize: Loads the configuration from the YAML file.
-  # - get_url(shortcut): Retrieves the URL for a given shortcut.
-  # - list_shortcuts: Lists all the shortcuts.
-  # - add_shortcut(name, url): Adds a new shortcut with the given name and URL.
-  # - remove_shortcut(name): Removes the shortcut with the given name.
-  #
-  # Private Methods:
-  # - config_path: Determines the path to the configuration file.
-  # - find_config_in_path(start_path): Searches for the configuration file starting from a given path.
-  # - load_config: Loads the configuration from the YAML file.
-  # - save_config: Saves the current configuration to the YAML file.
   class Config
-    CONFIG_FILE = ".project_navigator.yml"
+    CONFIG_FILE = ".navio.yml"
 
     def initialize
       @config = load_config

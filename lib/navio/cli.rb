@@ -1,58 +1,36 @@
 # frozen_string_literal: true
 
-# require "optparse"
 require_relative "config"
 require_relative "launcher"
 
 module Navio
   # CLI class provides command-line interface for managing project URL shortcuts.
-  # It supports adding, removing, listing shortcuts, and opening URLs associated with shortcuts.
-
-  # Usage:
-  #   nav <shortcut>           Open the URL for the given shortcut
-  #   nav add <name> <url>     Add a new shortcut
-  #   nav remove <name>        Remove a shortcut
-  #   nav list                 Show all defined shortcuts
-  #   nav help                 Show help message
-  #
-  # Examples:
-  #   nav add repo https://github.com/username/project
-  #   nav add figma https://figma.com/file/project-design
-  #   nav repo                 # Opens the repository URL
-  #
-  # Methods:
-  # - initialize: Initializes the CLI with a new Config instance.
-  # - run(args): Executes the command based on provided arguments.
-  # - open_url(shortcut): Opens the URL associated with the given shortcut.
-  # - add_shortcut(args): Adds a new shortcut with the provided name and URL.
-  # - remove_shortcut(args): Removes the shortcut with the given name.
-  # - list_shortcuts: Lists all defined shortcuts.
-  # - show_help: Displays the help message.
   class CLI
+    # Command mapping with command names as keys and method names as values
+    COMMANDS = {
+      "add" => :add_shortcut,
+      "set" => :add_shortcut,
+      "remove" => :remove_shortcut,
+      "rm" => :remove_shortcut,
+      "delete" => :remove_shortcut,
+      "list" => :list_shortcuts,
+      "ls" => :list_shortcuts,
+      "help" => :show_help
+    }.freeze
+
     def initialize
       @config = Config.new
       @launcher = Launcher.new
     end
 
     def run(args)
-      if args.empty?
-        show_help
-        return
-      end
+      return how_help if args.empty?
 
       command = args.shift
 
-      case command
-      when "add", "set"
-        add_shortcut(args)
-      when "remove", "rm", "delete"
-        remove_shortcut(args)
-      when "list", "ls"
-        list_shortcuts
-      when "help"
-        show_help
+      if COMMANDS.key?(command)
+        send(COMMANDS[command], args)
       else
-        # Assume it's a shortcut name
         open_url(command) || show_help
       end
     end
@@ -74,14 +52,13 @@ module Navio
 
     def add_shortcut(args)
       if args.size < 2
-        puts "Error: Missing arguments. Usage: nav add <shortcut> <url>"
+        puts "Error: Missing arguments. Usage: navio add <shortcut> <url>"
         return
       end
 
       name = args[0]
       url = args[1]
 
-      # Add protocol if missing
       url = "https://#{url}" unless url.start_with?("http://", "https://")
 
       @config.add_shortcut(name, url)
@@ -90,7 +67,7 @@ module Navio
 
     def remove_shortcut(args)
       if args.empty?
-        puts "Error: Missing shortcut name. Usage: nav remove <shortcut>"
+        puts "Error: Missing shortcut name. Usage: navio remove <shortcut>"
         return
       end
 
@@ -103,11 +80,11 @@ module Navio
       end
     end
 
-    def list_shortcuts
+    def list_shortcuts(_args = [])
       shortcuts = @config.list_shortcuts
 
       if shortcuts.empty?
-        puts "No shortcuts defined. Add one with 'nav add <shortcut> <url>'"
+        puts "No shortcuts defined. Add one with 'navio add <shortcut> <url>'"
         return
       end
 
@@ -117,21 +94,21 @@ module Navio
       end
     end
 
-    def show_help
+    def show_help(_args = [])
       puts <<~HELP
-        Project Navigator - Quick access to project URLs
+        Navio - Quick access to project URLs
 
         Usage:
-          nav <shortcut>           Open the URL for the given shortcut
-          nav add <name> <url>     Add a new shortcut
-          nav remove <name>        Remove a shortcut
-          nav list                 Show all defined shortcuts
-          nav help                 Show this help message
+          navio <shortcut>           Open the URL for the given shortcut
+          navio add <name> <url>     Add a new shortcut
+          navio remove <name>        Remove a shortcut
+          navio list                 Show all defined shortcuts
+          navio help                 Show this help message
 
         Examples:
-          nav add repo https://github.com/username/project
-          nav add figma https://figma.com/file/project-design
-          nav repo                 # Opens the repository URL
+          navio add repo https://github.com/username/project
+          navio add figma https://figma.com/file/project-design
+          navio repo                 # Opens the repository URL
       HELP
     end
   end

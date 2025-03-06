@@ -1,19 +1,30 @@
 PATH
   remote: .
   specs:
-    navio (0.1.1)
+    navio (0.1.0)
+      launchy (~> 3.1.1)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     diff-lcs (1.5.1)
     json (2.9.1)
     language_server-protocol (3.17.0.4)
+    launchy (3.1.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+      logger (~> 1.6)
+    logger (1.6.6)
     parallel (1.26.3)
     parser (3.3.7.0)
       ast (~> 2.4.1)
       racc
+    public_suffix (6.0.1)
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.2.1)
