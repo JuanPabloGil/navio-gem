@@ -3,7 +3,6 @@
 require_relative "config"
 require_relative "launcher"
 
-require "byebug"
 module Navio
   # CLI class provides command-line interface for managing project URL shortcuts.
   class CLI
