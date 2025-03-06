@@ -1,7 +1,8 @@
 # frozen_string_literal: true
 
-require "config"
-require "launcher"
+# require "optparse"
+require_relative "config"
+require_relative "launcher"
 
 module Navio
   # CLI class provides command-line interface for managing project URL shortcuts.
@@ -30,7 +31,7 @@ module Navio
   class CLI
     def initialize
       @config = Config.new
-      @launcher = Launcher.new(@config)
+      @launcher = Launcher.new
     end
 
     def run(args)
@@ -63,7 +64,7 @@ module Navio
 
       if url
         puts "Opening #{url}..."
-        @launcher.open(url)
+        @launcher.open_url(url)
         true
       else
         puts "Error: No URL found for '#{shortcut}'"
