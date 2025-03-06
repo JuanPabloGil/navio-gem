@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    navio (0.1.0)
+    navio (0.1.1)
       launchy (~> 3.1.1)
 
 GEM
