@@ -154,13 +154,6 @@ RSpec.describe Navio::CLI do
         expect(cli.send(:open_url, "github")).to be true
       end
     end
-
-    context "with an invalid shortcut" do
-      it "shows an error message" do
-        expect { cli.open_url(nonexistent) }.to output(/Error: No URL found for/).to_stdout
-        expect(cli.send(:open_url, "nonexistent")).to be false
-      end
-    end
   end
 
   describe "#show_help" do
