@@ -1,12 +1,36 @@
 # frozen_string_literal: true
 
 require "config"
-require "browser"
+require "launcher"
 
 module Navio
+  # CLI class provides command-line interface for managing project URL shortcuts.
+  # It supports adding, removing, listing shortcuts, and opening URLs associated with shortcuts.
+
+  # Usage:
+  #   nav <shortcut>           Open the URL for the given shortcut
+  #   nav add <name> <url>     Add a new shortcut
+  #   nav remove <name>        Remove a shortcut
+  #   nav list                 Show all defined shortcuts
+  #   nav help                 Show help message
+  #
+  # Examples:
+  #   nav add repo https://github.com/username/project
+  #   nav add figma https://figma.com/file/project-design
+  #   nav repo                 # Opens the repository URL
+  #
+  # Methods:
+  # - initialize: Initializes the CLI with a new Config instance.
+  # - run(args): Executes the command based on provided arguments.
+  # - open_url(shortcut): Opens the URL associated with the given shortcut.
+  # - add_shortcut(args): Adds a new shortcut with the provided name and URL.
+  # - remove_shortcut(args): Removes the shortcut with the given name.
+  # - list_shortcuts: Lists all defined shortcuts.
+  # - show_help: Displays the help message.
   class CLI
     def initialize
       @config = Config.new
+      @launcher = Launcher.new(@config)
     end
 
     def run(args)
@@ -39,7 +63,7 @@ module Navio
 
       if url
         puts "Opening #{url}..."
-        Browser.open(url)
+        @launcher.open(url)
         true
       else
         puts "Error: No URL found for '#{shortcut}'"
